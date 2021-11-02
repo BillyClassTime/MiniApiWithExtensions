@@ -198,8 +198,9 @@ using minAPIs.Extensions;
 var title = "dev";
 var version = "v5" ;
 
-var builder = WebApplication.CreateBuilder(args).
-  IocContainer(title,version)
+var builder = WebApplication
+  .CreateBuilder(args)
+  .IocContainer(title,version)s
   .Build()
   .AppMiddleware($"{title} {version}");
 ```
