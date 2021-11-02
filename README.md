@@ -300,3 +300,90 @@ builder.Run();
 
 ![](img/dotnet04.png)
 
+Adding a private method in **RESTMethogs** Class
+
+```c#
+namespace minAPIs.Extensions
+{
+    public static class RESTMethods
+    {
+        public static WebApplication GetMethods(this WebApplication app)
+        {
+            app.GetWeather();
+            return app;
+        }
+        internal record Weather(DateTime Data, int TemperatureC, string? Summary)
+        {
+            public int TemperaturaF => 32 + (int)(TemperatureC / 0.5556);
+        }
+
+        private static WebApplication GetWeather(this WebApplication app)
+        {
+            var summaries = new[]
+                {
+                    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+                };
+            app.MapGet("/Weather", () =>
+            {
+                var forescast = Enumerable.Range(1, 5).Select(index =>
+                new Weather
+                (
+                    DateTime.Now.AddDays(index),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+                return forescast;
+            })
+            .WithName("GetWeather");
+            return app;
+        }
+    }
+}
+```
+
+And update midleware class to include the **GetMethods** call:
+
+```c#
+namespace minAPIs.Extensions
+{
+    public static class AppExtensions
+    {
+        public static WebApplication AppMiddleware(this WebApplication app,string swaggerDefinition)
+        {
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", swaggerDefinition));
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
+
+            app.GetMethods();
+
+            return app;
+        }
+    }
+}
+```
+
+And the ```Program.cs``` file migth looks something like this:
+
+```c#
+using minAPIs.Extensions;
+var title = "dev";
+var version = "v9" ;
+var builder = WebApplication.CreateBuilder(args);
+builder
+    .IocContainer(title, version)
+    .Build()
+    .AppMiddleware($"{title} {version}")
+    .Run();
+```
+
