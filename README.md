@@ -204,3 +204,6 @@ var builder = WebApplication.CreateBuilder(args).
   .AppMiddleware($"{title} {version}");
 ```
 
+When you execute the application the web page is shown like this:
+
+![](img/dotnet03.png)
