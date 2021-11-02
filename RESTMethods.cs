@@ -4,6 +4,16 @@
     {
         public static WebApplication GetMethods(this WebApplication app)
         {
+            app.GetWeather();
+            return app;
+        }
+        internal record Weather(DateTime Data, int TemperatureC, string? Summary)
+        {
+            public int TemperaturaF => 32 + (int)(TemperatureC / 0.5556);
+        }
+
+        private static WebApplication GetWeather(this WebApplication app)
+        {
             var summaries = new[]
                 {
                     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -22,10 +32,6 @@
             })
             .WithName("GetWeather");
             return app;
-        }
-        internal record Weather(DateTime Data, int TemperatureC, string? Summary)
-        {
-            public int TemperaturaF => 32 + (int)(TemperatureC / 0.5556);
         }
     }
 }
