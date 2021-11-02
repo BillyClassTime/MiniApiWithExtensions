@@ -18,8 +18,6 @@ namespace minAPIs.Extensions
 
             app.MapControllers();
 
-            app.Run();
-
             return app;
         }
     }
