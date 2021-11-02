@@ -22,7 +22,7 @@ The content of the new webapi files is similar to next list:
 + Program.cs
 + WeatherForecastController.cs
 
-The files are describe like this:
+The files are describe to show something like this:
 
 ```c#
 // WeatherForecastController.cs 
@@ -91,13 +91,13 @@ app.MapControllers();
 app.Run();
 ```
 
-If we  run the application the result is like this:
+If we  run the application the result is something like this:
 
 ![](img/dotnet02.png)
 
 Now we are going to do some changes to show the use of extensions:
 
-First create a class ```BuilderExtensions.cs``` like this:
+First create a class ```BuilderExtensions.cs``` looks something like this:
 
 ```c#
 using Microsoft.OpenApi.Models;
@@ -120,11 +120,11 @@ namespace minAPIs.Extensions
 }
 ```
 
-Note we pass the values of Program.cs to BuilderExtensions.cs, and using the **this** reserved word to do the extension at **WebApplicationBuilder** class.
+Note we passed the values of ```Program.cs``` to ```BuilderExtensions.cs```, and using the **this** keywordin the parameter signature at **WebApplicationBuilder** class.
 
-Also we had added two extra arguments to pass the values of swager documentation: title and version.
+Also we had added two extra arguments to pass the values of **swagger** documentation: title and version.
 
-In Program.cs we change the code like this:
+In ```Program.cs``` we change the code migth looks something like this:
 
 ```c#
 /// Program.cs
@@ -177,7 +177,7 @@ namespace minAPIs.Extensions
 }
 ```
 
-And the changes in ```Program.cs``` and the result is like this:
+And the changes in ```Program.cs``` and the result is looks something like this:
 
  ```c#
  /// Program.cs
@@ -189,7 +189,7 @@ And the changes in ```Program.cs``` and the result is like this:
  app.AppMidleware("dev v5");
  ```
 
-Finally we can reduce the simple expression and the result can be like this:
+Finally we can reduce the simple expression and the program file migth look something like this:
 
 ```c#
 /// Program.cs
