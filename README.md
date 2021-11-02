@@ -387,3 +387,6 @@ builder
     .Run();
 ```
 
+The result looks something like this:
+
+![](img/dotnet05.png)
