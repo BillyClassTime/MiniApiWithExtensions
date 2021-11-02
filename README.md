@@ -200,7 +200,7 @@ var version = "v5" ;
 
 var builder = WebApplication
   .CreateBuilder(args)
-  .IocContainer(title,version)s
+  .IocContainer(title,version)
   .Build()
   .AppMiddleware($"{title} {version}");
 ```
@@ -208,3 +208,4 @@ var builder = WebApplication
 When you execute the application the web page is shown like this:
 
 ![](img/dotnet03.png)
+
